@@ -1,5 +1,7 @@
+
+
 import os
-import sqlite3
+import psycopg2
 import shutil
 
 # Remove all files in the 'dataset' directory
@@ -26,11 +28,17 @@ for cluster_dir in os.listdir(source_dir):
 shutil.rmtree(source_dir)
 
 # Connect to the SQLite database
-conn = sqlite3.connect('customer_faces_data.db')
+conn = psycopg2.connect(
+    dbname="customer_faces_data",
+    user="postgres",
+    password="vava 635",
+    host="localhost",
+    port="5432"
+)
 c = conn.cursor()
 
 # Retrieve all records from the 'faces' table
-c.execute("SELECT id, image_path FROM customers")
+c.execute("SELECT id, image_path FROM cutomers")
 rows = c.fetchall()
 
 # Loop through each record

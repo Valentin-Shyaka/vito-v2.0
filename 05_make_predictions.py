@@ -1,5 +1,5 @@
 import cv2
-import sqlite3
+import psycopg2
 
 # Load pre-trained face recognition model
 faceRecognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -43,10 +43,16 @@ while True:
         customer_uid, Confidence = faceRecognizer.predict(gray[y:y + h, x:x + w])
         # Connect to SQLite database
         try:
-            conn = sqlite3.connect('customer_faces_data.db')
+            conn = psycopg2.connect(
+                dbname="customer_faces_data",
+                user="postgres",
+                password="vava 635",
+                host="localhost",
+                port="5432"
+            )
             c = conn.cursor()
             #print("Successfully connected to the database")
-        except sqlite3.Error as e:
+        except psycopg2.Error as e:
             print("SQLite error:", e)
 
 
