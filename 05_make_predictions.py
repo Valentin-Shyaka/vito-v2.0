@@ -56,7 +56,7 @@ while True:
             print("SQLite error:", e)
 
 
-        c.execute("SELECT customer_name FROM customers WHERE customer_uid LIKE ?", (f"{customer_uid}%",))
+        c.execute("SELECT customer_name FROM cutomers WHERE customer_uid::text LIKE %s", (f"{customer_uid}%",))
         row = c.fetchone()
         if row:
             customer_name = row[0].split(" ")[0]
