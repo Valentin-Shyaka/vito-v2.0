@@ -124,11 +124,12 @@ if len(faces) > 0:
 
                 # Save face data to database
                 try:
-                    c.execute("INSERT INTO cutomers (customer_uid, customer_name, image_path) VALUES ($1, $2, $3)", (customer_uid, customer_name, image_path))
+                    c.execute("INSERT INTO cutomers (customer_uid, customer_name, image_path) VALUES (%s, %s, %s)", (customer_uid, customer_name, image_path))
                     conn.commit()
-                    #print("Image inserted into database successfully")
+                    print("Image inserted into database successfully")
                 except psycopg2.Error as e:
-                    print("SQLite error:", e)
+                    print("PostgreSQL error:", e)
+                    conn.rollback()
 
         # Display the video frame with rectangle
         cv2.imshow("Dataset Generating...", image)

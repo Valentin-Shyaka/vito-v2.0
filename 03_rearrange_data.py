@@ -48,7 +48,7 @@ for row in rows:
     # Check if the associated picture file exists in the 'dataset' folder
     if not os.path.isfile(image_path):
         # If the picture file does not exist, delete the record from the 'faces' table
-        c.execute("DELETE FROM customers WHERE id=?", (row[0],))
+        c.execute("DELETE FROM cutomers WHERE id=%s", (row[0],))
         conn.commit()
         print(f"Deleted record with id {row[0]} because the associated picture '{image_path}' does not exist.")
 
